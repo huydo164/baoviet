@@ -55,6 +55,10 @@ class BaseStaticsController extends Controller{
         $arrTextLogo = Info::getItemByKeyword('SITE_LOGO');
         View::share('arrTextLogo',$arrTextLogo);
 
+        $search['field_get'] = 'statics_id,statics_title,statics_intro,statics_created,statics_view_num';
+        $popular_post = Statics::getPopularPost($search,3);
+        View::share('popular_post',$popular_post);
+
     }
     public function page403(){
         $meta_img='';

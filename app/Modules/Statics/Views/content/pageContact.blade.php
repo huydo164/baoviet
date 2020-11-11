@@ -51,14 +51,15 @@ use App\Library\PHPDev\ThumbImg;
                                 <h4>Pre-Sale Question</h4>
                                 <p>Fusce dapibus nunc quis quam tempor vestibulum sit amet consequat enim. Pellentesque blandit hendrerit placerat. Integertis non.</p>
                             </div>
-                            <div class="col-lg-7">
-                                <form class="form-wrapper">
-                                    <input type="text" class="form-control" placeholder="Your name">
-                                    <input type="text" class="form-control" placeholder="Email address">
-                                    <input type="text" class="form-control" placeholder="Phone">
-                                    <input type="text" class="form-control" placeholder="Subject">
-                                    <textarea class="form-control" placeholder="Your message"></textarea>
-                                    <button type="submit" class="btn btn-primary">Send <i class="fa fa-envelope-open-o"></i></button>
+                            <div class="col-lg-7" id="form-contact">
+                                <form class="form-wrapper"  >
+                                    <input type="text" class="form-control name" placeholder="Your name">
+                                    <input type="email" class="form-control email" placeholder="Email address">
+                                    <input type="text" class="form-control phone" placeholder="Phone">
+                                    <textarea class="form-control message" placeholder="Your message"></textarea>
+                                    {{ csrf_field() }}
+                                    <button type="submit" id="contact_button" class="btn btn-primary">Gửi <i class="fa fa-envelope-open-o"></i></button>
+
                                 </form>
                             </div>
                         </div>
