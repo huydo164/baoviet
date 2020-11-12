@@ -285,4 +285,70 @@ class Statics extends Model {
         }
         return $result;
     }
+    public static function searchByConditionOnePage($dataSearch=array(), $limit=0){
+        try{
+
+            $query = Statics::where('statics_id','>',0);
+
+            if (isset($dataSearch['statics_title']) && $dataSearch['statics_title'] != '') {
+                $query->where('statics_title','LIKE', '%' . $dataSearch['statics_title'] . '%');
+            }
+            if (isset($dataSearch['statics_status']) && $dataSearch['statics_status'] != -1) {
+                $query->where('statics_status', $dataSearch['statics_status']);
+            }
+            if (isset($dataSearch['statics_focus']) && $dataSearch['statics_focus'] != -1) {
+                $query->where('statics_focus', $dataSearch['statics_focus']);
+            }
+
+
+            if(isset($dataSearch['statics_catid']) && $dataSearch['statics_catid'] != -1){
+                $catid = $dataSearch['statics_catid'];
+                $arrCat = array($catid);
+                Category::makeListCatId($catid, 0, $arrCat);
+                if(is_array($arrCat) && !empty($arrCat)){
+                    $query->whereIn('statics_catid', $arrCat);
+                }
+            }
+
+            if (isset($dataSearch['statics_id'])) {
+                if(is_array($dataSearch['statics_id']) && !empty($dataSearch['statics_id'])){
+                    $query->whereIn('statics_id', $dataSearch['statics_id']);
+                }else{
+                    if($dataSearch['statics_id'] > 0){
+                        $query->where('statics_id', $dataSearch['statics_id']);
+                    }
+                }
+            }
+
+
+            $query->orderBy('statics_id', 'asc');
+
+            $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+            if(!empty($fields)){
+                $result = $query->take($limit)->get($fields);
+            }else{
+                $result = $query->take($limit)->get();
+            }
+            return $result;
+
+        }catch (PDOException $e){
+            throw new PDOException();
+        }
+    }
+    public static function getPopularPost($dataSearch=array(), $limit=10){
+        $result = array();
+        try{
+            if($limit > 0){
+                $query = Statics::where('statics_id','>', 0);
+                $query->where('statics_status', CGlobal::status_show);
+                $query->orderBy('statics_created', 'asc')->orderBy('statics_view_num','asc');
+                $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+                $result = $query->take($limit)->get($fields);
+            }
+
+        }catch (PDOException $e){
+            throw new PDOException();
+        }
+        return $result;
+    }
 }

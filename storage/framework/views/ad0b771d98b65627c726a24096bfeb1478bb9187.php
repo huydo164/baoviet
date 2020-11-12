@@ -88,15 +88,15 @@ use App\Library\PHPDev\ThumbImg;
             <h2 class="widget-title">Popular Posts</h2>
             <div class="blog-list-widget">
                 <div class="list-group">
-                    @foreach($popular_post as $item)
+                    <?php $__currentLoopData = $popular_post; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="w-100 justify-content-between">
-                                <img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800, 0, '', true, true)}}" alt="" class="img-fluid float-left">
-                                <h5 class="mb-1">{{ $item->statics_title }}</h5>
-                                <small>{{ date('d/m/Y', $item->statics_date) }}</small>
+                                <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800, 0, '', true, true)); ?>" alt="" class="img-fluid float-left">
+                                <h5 class="mb-1"><?php echo e($item->statics_title); ?></h5>
+                                <small><?php echo e(date('d/m/Y', $item->statics_date)); ?></small>
                             </div>
                         </a>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
             <!-- end blog-list -->
@@ -127,3 +127,4 @@ use App\Library\PHPDev\ThumbImg;
     </div>
     <!-- end sidebar -->
 </div>
+<?php /**PATH D:\wamp64\www\baoviet\app\Modules/Statics/Views/block/right.blade.php ENDPATH**/ ?>

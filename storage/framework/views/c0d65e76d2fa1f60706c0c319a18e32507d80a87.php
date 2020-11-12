@@ -5,14 +5,14 @@ use App\Library\PHPDev\CGlobal;
 use App\Library\PHPDev\Utility;
 use App\Library\PHPDev\ThumbImg;
 ?>
-@extends('Statics::layout.html')
-@section('header')
-    @include('Statics::block.header')
-@stop
-@section('footer')
-    @include('Statics::block.footer')
-@stop
-@section('content')
+
+<?php $__env->startSection('header'); ?>
+    <?php echo $__env->make('Statics::block.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('footer'); ?>
+    <?php echo $__env->make('Statics::block.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
     <div class="page-title lb single-wrapper">
         <div class="container">
@@ -57,7 +57,8 @@ use App\Library\PHPDev\ThumbImg;
                                     <input type="email" class="form-control email" placeholder="Email address">
                                     <input type="text" class="form-control phone" placeholder="Phone">
                                     <textarea class="form-control message" placeholder="Your message"></textarea>
-                                    {{ csrf_field() }}
+                                    <?php echo e(csrf_field()); ?>
+
                                     <button type="submit" id="contact_button" class="btn btn-primary">Gửi <i class="fa fa-envelope-open-o"></i></button>
 
                                 </form>
@@ -73,4 +74,5 @@ use App\Library\PHPDev\ThumbImg;
         <!-- end container -->
     </section>
 
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('Statics::layout.html', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wamp64\www\baoviet\app\Modules/Statics/Views/content/pageContact.blade.php ENDPATH**/ ?>
