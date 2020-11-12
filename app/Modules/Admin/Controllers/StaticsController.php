@@ -103,6 +103,14 @@ class StaticsController extends BaseAdminController{
                 }
                 //Main Img
                 $statics_image = trim($data->statics_image);
+                if(Request::hasFile('file')){
+
+                    $file = Request::file('file');
+                    $filename = $file->getClientOriginalName();
+                    $path = public_path().'/uploads/';
+                    return $file->move($path, $filename);
+                }
+
             }
         }
 
@@ -194,7 +202,7 @@ class StaticsController extends BaseAdminController{
                     TagStatics::create($tmp);
                 }
             }
-
+            dd($dataSave);
             return Redirect::route('admin.statics');
         }else{
             foreach($dataSave as $key=>$val){

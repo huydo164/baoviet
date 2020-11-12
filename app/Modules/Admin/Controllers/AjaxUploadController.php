@@ -7,14 +7,11 @@
 */
 namespace App\Modules\Admin\Controllers;
 
-use App\Modules\Models\Bank;
 use App\Modules\Models\Banner;
 use App\Modules\Models\Category;
 use App\Library\PHPDev\ThumbImg;
 use App\Library\PHPDev\Upload;
 use App\Modules\Models\Statics;
-use App\Modules\Models\Training;
-use App\Modules\Models\TypeCard;
 use Illuminate\Support\Facades\Request;
 use App\Modules\Models\Info;
 use App\Library\PHPDev\CGlobal;
