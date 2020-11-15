@@ -67,6 +67,7 @@ class CGlobal{
     const FOLDER_INFO = 'info';
     const FOLDER_STATICS = 'statics';
     const FOLDER_TRAINING = 'training';
+    const FOLDER_AUTHOR = 'author';
 
     //Api Key Facebook
     const facebook_app_id = '';

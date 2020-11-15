@@ -5,6 +5,7 @@ $(document).ready(function($){
     SITE.contactPopup();
     SITE.trainingPopup();
     SITE.btnSendTrainingNote();
+    SITE.commentSubmit();
 });
 
 SITE={
@@ -203,5 +204,35 @@ SITE={
             }
             return valid;
         });
+    },
+    commentSubmit:function (){
+        $('#comment_submit').unbind('click').click(function (){
+            var url = BASE_URL + 'binh-luan';
+            var comment = $('#comment_details').val();
+            var name = $('#comment_name').val();
+            var email = $('#comment_email').val();
+            var web = $('#comment_web').val();
+            var statics_id = $('#statics_id').val();
+            var _token = jQuery('input[name="_token"]').val();
+            jConfirm('Bạn có muốn đánh giá không [OK]:Đồng ý [Cancel]:Bỏ qua ?', 'Xác nhận', function (r) {
+                if (r) {
+                    jQuery.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {statics_id: statics_id ,comment : comment , name:name , email:email,web:web, _token: _token},
+                        success: function (data) {
+                            html.append(data);
+                            $('#comment_details').val('');
+                            $('#comment_name').val('');
+                            $('#comment_email').val('');
+                            $('#comment_web').val('');
+                        },
+                        error: function (data) {
+                            alert('khong the bình luận');
+                        }
+                    })
+                }
+            })
+        })
     }
 }

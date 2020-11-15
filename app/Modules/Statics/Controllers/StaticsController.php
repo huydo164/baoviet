@@ -15,7 +15,9 @@ use App\Library\PHPDev\Pagging;
 use App\Library\PHPDev\SEOMeta;
 use App\Library\PHPDev\ThumbImg;
 use App\Library\PHPDev\Utility;
+use App\Modules\Models\Author;
 use App\Modules\Models\Category;
+use App\Modules\Models\Comment;
 use App\Modules\Models\Contact;
 use App\Modules\Models\Info;
 use App\Modules\Models\Orders;
@@ -70,19 +72,25 @@ class StaticsController extends BaseStaticsController{
         $search['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created,statics_view_num';
         $data  = Statics::searchByCondition($search, $limit, $offset, $total);
         $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
-
-
-
-
-
         return view('Statics::content.index',[
             'data_first' => $data_first,
             'data' => $data,
             'paging' => $paging,
         ]);
     }
-    public function author(){
-        return view('Statics::content.pageAuthor');
+    public function pageAuthor($name = '' , $id = 0){
+        $data = $statics = array();
+        if($id > 0 )
+        {
+            $data = Author::getById($id);
+            $statics = Statics::getByAuthor($id);
+
+        }
+
+        return view('Statics::content.pageAuthor',[
+            'data' =>$data,
+            'statics'=>$statics,
+        ]);
     }
     public function danhmuc($catname, $catid){
         $pageNo = (int)Request::get('page', 1);
@@ -148,6 +156,55 @@ class StaticsController extends BaseStaticsController{
             }
         }
     }
+    public function binhluan(){
+
+        $comment =  Request::get('comment','');
+        $gmail =  Request::get('gmail','');
+        $name =  Request::get('name','');
+        $web =  Request::get('web','');
+        $statics_id = Request::get('statics_id','');
+        $ip = Request::ip();
+        if ( $comment != '' && $name != ''){
+            $dataInput = array(
+                'statics_id' => $statics_id,
+                'comment_name' => $name,
+                'comment_email' => $gmail,
+                'comment_detail'=>$comment,
+                'comment_web'=>$web,
+                'comment_ip'=>$ip,
+                'comment_status'=>0
+
+            );
+            $query = Comment::addData($dataInput);
+
+            if ($query > 0){
+                return '
+                <div class="modal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>';
+            }
+        }
+        else{
+            Utility::messages('messages' , 'Thông tin liên hệ chưa chính sác. Bạn hãy đăng ký lại!');
+
+        }
+    }
     public function StaticDetail($name = '' , $id = 0){
         $data = $dataCate = $dataSame =  array();
 
@@ -158,6 +215,9 @@ class StaticsController extends BaseStaticsController{
 
         $searchSame['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created';
         $dataSame = Statics::getSameData($id, $data->statics_catid, $limit = 2, $searchSame);
+
+
+        $comment = Comment::getByStaticId($data->statics_id);
 
 
 
@@ -171,6 +231,7 @@ class StaticsController extends BaseStaticsController{
             'data' => $data,
             'dataSame' => $dataSame,
             'dataTags' => $dataTags,
+            'comment' => $comment
         ]);
     }
 }

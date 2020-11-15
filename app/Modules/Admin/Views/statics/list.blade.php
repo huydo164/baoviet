@@ -1,6 +1,7 @@
 <?php
 use App\Library\PHPDev\FuncLib;
 use App\Library\PHPDev\CGlobal;
+
 ?>
 @extends('Admin::layout.html')
 @section('header')
@@ -94,6 +95,7 @@ use App\Library\PHPDev\CGlobal;
 										<th width="20%">Tiêu đề</th>
 										<th width="10%">Danh mục</th>
 										<th width="5%">Thứ tự</th>
+										<th width="5%">Tác giả</th>
 										<th width="5%">Ngày tạo</th>
 										<th width="5%">Nổi bật</th>
 										<th width="5%">Trạng thái</th>
@@ -115,6 +117,7 @@ use App\Library\PHPDev\CGlobal;
 												@if(isset($arrCate[$item['statics_catid']])) {{ $arrCate[$item['statics_catid']] }} @endif
 											</td>
 											<td>{{$item['statics_order_no']}}</td>
+											<td>@if(isset($item['author_id'])) {{ \App\Modules\Models\Author::getName($item->author_id) }} @endif </td>
 											<td>{{date('d/m/Y', $item['statics_created'])}}</td>
 											<td>
 												@if($item['statics_focus'] == '1')

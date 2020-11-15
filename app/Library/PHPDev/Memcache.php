@@ -51,4 +51,8 @@ class Memcache{
 	//Tag
     const CACHE_TAG_ID = 'cache_tag_id_';
     const CACHE_ALL_TAG = 'cache_all_tag';
+
+	const CACHE_COMMENT_ID = 'cache_comment_id_';
+	
+	const CACHE_AUTHOR_ID = 'cache_author_id_';
 }
