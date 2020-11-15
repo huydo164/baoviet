@@ -41,6 +41,16 @@ Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', '
     Route::post('contact/edit/{id?}', array('as' => 'admin.contact_edit','uses' => 'ContactController@postItem', 'permission_name'=>'Sửa liên hệ'))->where('id', '[0-9]+');
     Route::post('contact/delete', array('as' => 'admin.contact_delete','uses' => 'ContactController@delete', 'permission_name'=>'Xóa liên hệ'));
 
+    Route::get('comment', array('as' => 'admin.comment','uses' => 'CommentController@listView', 'permission_name'=>'Danh sách bình luận', 'display_menu'=>1, 'display_icon_sub'=>'fa fa-globe'));
+    Route::get('comment/edit/{id?}', array('as' => 'admin.comment_edit','uses' => 'CommentController@getItem', 'permission_name'=>'Chi tiết bình luận'))->where('id', '[0-9]+');
+    Route::post('comment/edit/{id?}', array('as' => 'admin.comment_edit','uses' => 'CommentController@postItem', 'permission_name'=>'Sửa bình luận'))->where('id', '[0-9]+');
+    Route::post('comment/delete', array('as' => 'admin.comment_delete','uses' => 'CommentController@delete', 'permission_name'=>'Xóa bình luận'));
+
+    Route::get('author', array('as' => 'admin.author','uses' => 'AuthorController@listView', 'permission_name'=>'Danh sách tác giả', 'display_menu'=>1, 'display_icon_sub'=>'fa fa-globe'));
+    Route::get('author/edit/{id?}', array('as' => 'admin.author_edit','uses' => 'AuthorController@getItem', 'permission_name'=>'Chi tiết tác giả'))->where('id', '[0-9]+');
+    Route::post('author/edit/{id?}', array('as' => 'admin.author_edit','uses' => 'AuthorController@postItem', 'permission_name'=>'Sửa tác giả'))->where('id', '[0-9]+');
+    Route::post('author/delete', array('as' => 'admin.author_delete','uses' => 'AuthorController@delete', 'permission_name'=>'Xóa tác giả'));
+
 });
 
 Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', 'namespace' => $namespace , 'group'=>'5','group_name'=>'Hệ thống', 'display_icon'=>'fa fa-tag'], function () {

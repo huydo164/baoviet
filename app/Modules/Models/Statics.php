@@ -25,7 +25,7 @@ class Statics extends Model {
 
     protected $fillable = array(
         'statics_id', 'statics_catid', 'statics_cat_name', 'statics_cat_alias', 'statics_title', 'statics_intro', 'statics_content', 'statics_view_num',
-        'statics_image', 'statics_image_other', 'statics_created', 'statics_order_no', 'statics_focus', 'statics_status', 'statics_word', 'meta_title', 'meta_keywords', 'meta_description', 'statics_tag');
+        'statics_image', 'statics_image_other','author_id', 'statics_created', 'statics_order_no', 'statics_focus', 'statics_status', 'statics_word', 'meta_title', 'meta_keywords', 'meta_description', 'statics_tag');
 
     public static function searchByCondition($dataSearch=array(), $limit=0, $offset=0, &$total){
         try{
@@ -350,5 +350,29 @@ class Statics extends Model {
             throw new PDOException();
         }
         return $result;
+    }
+    public static function getByAuthor($id, $limit=10,$offset=0){
+        try{
+
+            $query = Statics::where('statics_id','>',0);
+
+            if (isset($id) ) {
+                $query = Statics::where('author_id',$id);
+            }
+
+            $total = $query->count(['statics_id']);
+            $query->orderBy('statics_id', 'asc');
+
+            $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+            if(!empty($fields)){
+                $result = $query->take($limit)->skip($offset)->get($fields);
+            }else{
+                $result = $query->take($limit)->skip($offset)->get();
+            }
+            return $result;
+
+        }catch (PDOException $e){
+            throw new PDOException();
+        }
     }
 }

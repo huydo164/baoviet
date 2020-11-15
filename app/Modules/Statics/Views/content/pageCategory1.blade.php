@@ -57,7 +57,7 @@ use App\Library\PHPDev\ThumbImg;
                                                 <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
                                                 <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">{{ $item->statics_cat_name }}</a></small>
                                                 <small><a href="tech-single.html" title="">{{ date('d/m/Y', $item->statics_date) }}</a></small>
-                                                <small><a href="tech-author.html" title="">by Matilda</a></small>
+                                                <small><a href="tech-author.html" title="">by </a></small>
                                                 <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> {{ $item->statics_view_num }}</a></small>
                                             </div><!-- end meta -->
                                         </div><!-- end blog-box -->
