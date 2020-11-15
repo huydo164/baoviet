@@ -58,16 +58,16 @@ use App\Library\PHPDev\FuncLib;
                                                     <div class="clearfix"></div>
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
-                                                            <label class="control-label">Ảnh banner danh mục</label>
+                                                            <label class="control-label">Ảnh tác giả</label>
                                                             <div class="controls">
-                                                                <a href="javascript:;" class="btn btn-primary link-button btn-sm" onclick="UploadAdmin.uploadBannerAdvanced(2);">Ảnh banner danh mục</a>
+                                                                <a href="javascript:;" class="btn btn-primary link-button btn-sm" onclick="UploadAdmin.uploadBannerAdvanced(2);">Upload ảnh tác giả</a>
                                                                 <div id="sys_show_image_banner">
-                                                                    @if(isset($data['category_image']) && $data['category_image'] !='')
-                                                                    <img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_CATEGORY, $data['category_id'], $data['category_image'], 300, 0, '', true, true)}}" />
+                                                                    @if(isset($data['author_image']) && $data['author_image'] !='')
+                                                                    <img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_AUTHOR, $data['author_id'], $data['author_image'], 300, 0, '', true, true)}}" />
                                                                     @endif
                                                                 </div>
-                                                                <input name="img" type="hidden" id="img" @if(isset($data['category_image']))value="{{$data['category_image']}}" @endif>
-                                                                <input name="img_old" type="hidden" id="img_old" @if(isset($data['category_image']))value="{{$data['category_image']}}" @endif>
+                                                                <input name="img" type="hidden" id="img" @if(isset($data['author_image']))value="{{$data['author_image']}}" @endif>
+                                                                <input name="img_old" type="hidden" id="img_old" @if(isset($data['author_image']))value="{{$data['author_image']}}" @endif>
                                                             </div>
                                                         </div>
                                                     </div>
