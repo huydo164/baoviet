@@ -1,5 +1,4 @@
 <?php
-
 use App\Library\PHPDev\CGlobal;
 use App\Library\PHPDev\FuncLib;
 use App\Library\PHPDev\ThumbImg;
@@ -30,7 +29,7 @@ use App\Library\PHPDev\ThumbImg;
                                     @endif
                                 @endforeach
                                 <li class="nav-item @if($key == 1) nav-item dropdown has-submenu menu-large hidden-md-down hidden-sm-down hidden-xs-down @endif">
-                                    <a @if($i > 0) @endif title="{{$cat->category_title}}" class="nav-link @if($key == 1) dropdown-toggle @endif" @if($key == 1) id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @endif href="#">
+                                    <a @if($i > 0) @endif title="{{$cat->category_title}}" class="nav-link @if($key == 1) dropdown-toggle @endif" @if($key == 1) id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @endif href="@if($cat->category_link_replace != ''){{$cat->category_link_replace}}@else{{FuncLib::buildLinkCategory($cat->category_id, $cat->category_title)}}@endif">
                                         {{$cat->category_title}}
                                     </a>
                                     @if($i > 0)
@@ -41,7 +40,7 @@ use App\Library\PHPDev\ThumbImg;
                                                         <div class="tab">
                                                             @foreach($arrCategory as $k => $sub)
                                                                 @if($sub->category_menu == CGlobal::status_show && $sub->category_parent_id == $cat->category_id)
-                                                                    <button class="tablinks @if($k == 2) active @endif" onclick="openCategory(event, '{{$k}}')">{{$sub->category_title}}</button>
+                                                                    <button data="{{$sub->category_id}}" class="tablinks tablinks{{$sub->category_id}}  @if($k == 2) active @endif" onclick="openCategory(event, '{{$k}}')">{{$sub->category_title}}</button>
                                                                 @endif
                                                             @endforeach
                                                         </div>
@@ -51,7 +50,7 @@ use App\Library\PHPDev\ThumbImg;
                                                                     <div id="{{$k}}" class="tabcontent @if($k == 2) active @endif">
                                                                         <div class="row">
                                                                             <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                                                <div class="blog-box">
+                                                                                <div class="blog-box blog-box24 active">
                                                                                     <div class="post-media">
                                                                                         <a href="tech-single.html" title="">
                                                                                             <img src="upload/tech_menu_01.jpg" alt="" class="img-fluid">
@@ -61,7 +60,33 @@ use App\Library\PHPDev\ThumbImg;
                                                                                         </a>
                                                                                     </div><!-- end media -->
                                                                                     <div class="blog-meta">
-                                                                                        <h4><a href="tech-single.html" title="">Top 10+ care advice for your toenails</a></h4>
+                                                                                        <h4><a href="tech-single.html" title="">box24</a></h4>
+                                                                                    </div><!-- end meta -->
+                                                                                </div><!-- end blog-box -->
+                                                                                <div class="blog-box blog-box25">
+                                                                                    <div class="post-media">
+                                                                                        <a href="tech-single.html" title="">
+                                                                                            <img src="upload/tech_menu_01.jpg" alt="" class="img-fluid">
+                                                                                            <div class="hovereffect">
+                                                                                            </div><!-- end hover -->
+                                                                                            <span class="menucat">Science</span>
+                                                                                        </a>
+                                                                                    </div><!-- end media -->
+                                                                                    <div class="blog-meta">
+                                                                                        <h4><a href="tech-single.html" title="">box25</a></h4>
+                                                                                    </div><!-- end meta -->
+                                                                                </div><!-- end blog-box -->
+                                                                                <div class="blog-box blog-box26">
+                                                                                    <div class="post-media">
+                                                                                        <a href="tech-single.html" title="">
+                                                                                            <img src="upload/tech_menu_01.jpg" alt="" class="img-fluid">
+                                                                                            <div class="hovereffect">
+                                                                                            </div><!-- end hover -->
+                                                                                            <span class="menucat">Science</span>
+                                                                                        </a>
+                                                                                    </div><!-- end media -->
+                                                                                    <div class="blog-meta">
+                                                                                        <h4><a href="tech-single.html" title="">box26</a></h4>
                                                                                     </div><!-- end meta -->
                                                                                 </div><!-- end blog-box -->
                                                                             </div>

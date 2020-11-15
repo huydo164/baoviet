@@ -45,10 +45,12 @@ class Memcache{
 	//Statics
 	const CACHE_STATICS_ID = 'cache_statics_id_';
 	const CACHE_STATICS_CAT_ID = 'cache_statics_cat_id_';
-	const CACHE_TRAINING_ID = 'cache_training_id_';
 	const CACHE_CONTACT_ID = 'cache_contact_id_';
-	const CACHE_ORDER_ID = 'cache_order_id_';
 	//Tag
     const CACHE_TAG_ID = 'cache_tag_id_';
     const CACHE_ALL_TAG = 'cache_all_tag';
+
+    const CACHE_VIDEO_ID = 'cache_video_id_';
+    const CACHE_VIDEO_CAT_ID = 'cache_video_cat_id_';
+    const CACHE_VIDEO_FOCUS = 'cache_video_focus_';
 }

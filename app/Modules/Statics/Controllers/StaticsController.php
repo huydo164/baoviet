@@ -18,12 +18,10 @@ use App\Library\PHPDev\Utility;
 use App\Modules\Models\Category;
 use App\Modules\Models\Contact;
 use App\Modules\Models\Info;
-use App\Modules\Models\Orders;
-use App\Modules\Models\Product;
-use App\Modules\Models\Rating;
 use App\Modules\Models\Statics;
 use App\Modules\Models\Tag;
 use App\Modules\Models\TagStatics;
+use App\Modules\Models\Video;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
@@ -109,9 +107,6 @@ class StaticsController extends BaseStaticsController{
             'paging' => $paging,
         ]);
     }
-    public function cate2(){
-        return view('Statics::content.pageCategory2');
-    }
     public function cate3(){
         return view('Statics::content.pageCategory3');
     }
@@ -171,6 +166,45 @@ class StaticsController extends BaseStaticsController{
             'data' => $data,
             'dataSame' => $dataSame,
             'dataTags' => $dataTags,
+        ]);
+    }
+
+    public function pageVideo($catname, $catid){
+        $pageNo = (int)Request::get('page', 1);
+        $pageScroll = CGlobal::num_scroll_page;
+        $limit = CGlobal::num_record_per_page;
+        $offset = ($pageNo - 1)*$limit;
+        $total = 0;
+        $data = $search = $dataCate =  array();
+        $paging = '';
+
+        if ($catid > 0){
+            $search['video_cat_name'] = $catname;
+            $search['video_catid'] = $catid;
+            $search['video_status'] = CGlobal::status_show;
+            $search['field_get'] = 'video_id,video_catid,video_cat_name,video_cat_alias,video_title,video_intro,video_content,video_image,video_created,video_youtube,video_tag,video_path';
+            $data = Video::searchByCondition($search, $limit, $offset, $total);
+            $paging = $total > 0 ? Pagging::getPager($pageScroll,$pageNo,$total,$limit, $search) : '';
+            $dataCate = Category::getById($catid);
+        }
+        $text_title_video = self::viewShareVal('TEXT_TITLE_VIDEO');
+
+        return view('Statics::content.pageVideo',[
+            'data' => $data,
+            'dataCate' => $dataCate,
+            'paging' => $paging,
+            'text_title_video' => $text_title_video,
+        ]);
+    }
+    public function videoDetail($name = '', $id = 0){
+        $data = $dataCate = array();
+        if ($id > 0){
+            $data = Video::getById($id);
+            $dataCate = Category::getById($data->video_catid);
+        }
+        return view('Statics::content.videoDetail',[
+            'data' => $data,
+            'dataCate' => $dataCate,
         ]);
     }
 }

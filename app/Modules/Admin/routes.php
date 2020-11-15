@@ -41,6 +41,11 @@ Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', '
     Route::post('contact/edit/{id?}', array('as' => 'admin.contact_edit','uses' => 'ContactController@postItem', 'permission_name'=>'Sửa liên hệ'))->where('id', '[0-9]+');
     Route::post('contact/delete', array('as' => 'admin.contact_delete','uses' => 'ContactController@delete', 'permission_name'=>'Xóa liên hệ'));
 
+    Route::get('video', array('as' => 'admin.video','uses' => 'VideoController@listView', 'permission_name'=>'Danh sách Video', 'display_menu'=>1, 'display_icon_sub'=>'fa fa-globe'));
+    Route::get('video/edit/{id?}', array('as' => 'admin.video_edit','uses' => 'VideoController@getItem', 'permission_name'=>'Chi tiết video'))->where('id', '[0-9]+');
+    Route::post('video/edit/{id?}', array('as' => 'admin.video_edit','uses' => 'VideoController@postItem', 'permission_name'=>'Sửa video'))->where('id', '[0-9]+');
+    Route::post('video/delete', array('as' => 'admin.video_delete','uses' => 'VideoController@delete', 'permission_name'=>'Xóa video'));
+
 });
 
 Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', 'namespace' => $namespace , 'group'=>'5','group_name'=>'Hệ thống', 'display_icon'=>'fa fa-tag'], function () {

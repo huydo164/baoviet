@@ -28,12 +28,14 @@
                     var checked_img_pro = "<div class='clear'></div><input type='radio' id='checked_image_"+dataResult.info.id_key+"' name='checked_image' value='"+dataResult.info.id_key+"' onclick='UploadAdmin.checkedImage(\""+dataResult.info.name_img+"\",\"" + dataResult.info.id_key + "\")'><label for='checked_image_"+dataResult.info.id_key+"' style='font-weight:normal'>Ảnh đại diện</label><br/>";
 
                     var delete_img = "<a href='javascript:void(0);' id='sys_delete_img_other_" + dataResult.info.id_key + "' onclick='UploadAdmin.removeImage(\""+dataResult.info.id_key+"\",\""+dataResult.id_item+"\",\""+dataResult.info.name_img+"\",\""+type+"\")' >Xóa ảnh</a>";
+                    var delete_video = "<a href='javascript:void(0);' id='sys_delete_video_other_" + "' onclick='UploadAdmin.removeVideo(\""+dataResult.id_item+"\",\""+dataResult.info.name_img+"\",\""+type+"\")' >Xóa Video</a>";
                     var html= "<li id='sys_div_img_other_" + dataResult.info.id_key + "'>";
                     html += "<div class='div_img_upload' >";
                     html += "<img height='80' src='" + dataResult.info.src + "'/>";
                     html += "<input type='hidden' id='sys_img_other_" + dataResult.info.id_key + "' class='sys_img_other' name='img_other[]' value='" + dataResult.info.name_img + "'/>";
                     html += checked_img_pro;
                     html += delete_img;
+                    html += delete_video;
                     html +="</div></li>";
                     jQuery('#sys_drag_sort').append(html);
 
@@ -102,7 +104,47 @@
         }
         jQuery("#sys_mulitplefileuploader").uploadFile(settings);
     },
+    uploadonVideo:function(type){
+        jQuery('#sys_PopupUploadVideoOtherPro').modal('show');
+        jQuery('.ajax-upload-dragdrop').remove();
+        var urlAjaxUpload = BASE_URL+'ajax/upload?act=upload_image';
+        var id_hiden = document.getElementById('id_hiden').value;
+        var _token = $('input[name="_token"]').val();
+        var settings = {
+            url: urlAjaxUpload,
+            method: "POST",
+            allowedTypes:"mp4,flv,mov",
+            fileName: "multipleFile",
+            formData: {id: id_hiden, type: type, _token: _token},
+            multiple: false,
+            onSubmit:function(){
+                jQuery( "#sys_show_button_upload_video").hide();
+                jQuery("#status_video").html("<span class='green'>Đang upload...</span>");
+            },
+            onSuccess:function(files,xhr,data){
+                dataResult = JSON.parse(xhr);
+                if(dataResult.intIsOK === 1){
+                    //gan lai id item cho id hiden: dung cho them moi, sua item
+                    jQuery('#id_hiden').val(dataResult.id_item);
+                    jQuery( "#sys_show_button_upload_video").show();
 
+                    //show ảnh
+                    var html = "<a href='" + dataResult.info.src + "'>"+dataResult.info.name_img+"</a><span class='deleteVideo'>X</span>";
+                    jQuery('#sys_show_video').html(html);
+
+                    //thanh cong
+                    jQuery("#status_video").html("<span class='green'>Upload is success</span>");
+                    setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",2000 );
+                    setTimeout( "jQuery('#stadVideoOtherPro').modal('hide');",2500 );
+                }
+                setTimeout( "jQuery('#sys_PopupUploatus_video').hide();",2000 );
+            },
+            onError: function(files,status,errMsg){
+                jQuery("#status").html("<span class='red'>Upload is Failed</span>");
+            }
+        }
+        jQuery("#sys_mulitplefileuploaderVideo").uploadFile(settings);
+    },
     checkedImage: function(nameImage,key){
         if (confirm('Bạn có muốn chọn ảnh này làm ảnh đại diện?')) {
             jQuery('#image_primary').val(nameImage);
@@ -112,7 +154,6 @@
             var key_pri = document.getElementById('sys_key_image_primary').value;
             jQuery('#sys_delete_img_other_'+key_pri).show();
             jQuery('#sys_key_image_primary').val(key);
-
         }
     },
 
@@ -120,15 +161,13 @@
         jQuery('#image_primary_hover').val(nameImage);
     },
 
-    removeImage: function(key,id,nameImage,type){
-
+    removeImage: function(id,nameImage,type){
         if(jQuery("#image_primary_hover").length ){
             var img_hover = jQuery("#image_primary_hover").val();
             if(img_hover == nameImage){
                 jQuery("#image_primary_hover").val('');
             }
         }
-
         if (confirm('Bạn có chắc xóa ảnh này?')) {
             var urlAjaxUpload = BASE_URL+'ajax/upload?act=remove_image';
             var _token = $('input[name="_token"]').val();
@@ -143,6 +182,37 @@
                         jQuery('#sys_div_img_other_'+key).hide();
                         jQuery('#sys_img_other_'+key).val('');
                         jQuery('#sys_new_img_'+key).hide();
+                    }else{
+                        jQuery('#sys_msg_return').html(data.msg);
+                    }
+                }
+            });
+        }
+        jQuery('#sys_PopupImgOtherInsertContent #div_image').html('');
+        UploadAdmin.getInsertImageContent(type, 'off');
+    },
+
+    removeVideo: function(key,id,nameVideo,type){
+        if(jQuery("#video_primary_hover").length ){
+            var video_hover = jQuery("#video_primary_hover").val();
+            if(video_hover == nameVideo){
+                jQuery("#video_primary_hover").val('');
+            }
+        }
+        if (confirm('Bạn có chắc xóa video này?')) {
+            var urlAjaxUpload = BASE_URL+'ajax/upload?act=remove_video';
+            var _token = $('input[name="_token"]').val();
+            jQuery.ajax({
+                type: "POST",
+                url: urlAjaxUpload,
+                data: {id : id, nameVideo : name, type: type, _token: _token},
+                responseType: 'json',
+                success: function(data) {
+                    dataResult = JSON.parse(data);
+                    if(dataResult.intIsOK === 1){
+                        jQuery('#sys_div_video_other_'+key).hide();
+                        jQuery('#sys_video_other_'+key).val('');
+                        jQuery('#sys_new_video_'+key).hide();
                     }else{
                         jQuery('#sys_msg_return').html(data.msg);
                     }
