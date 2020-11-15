@@ -22,5 +22,6 @@ class CDatabase{
     const statics = 'statics';
     const contact = 'contact';
     const tag = 'tag';
+    const video = 'video';
     const tag_statics = 'tag_statics';
 }

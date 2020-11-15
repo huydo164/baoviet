@@ -6,42 +6,16 @@ $(document).ready(function($){
     SITE.trainingPopup();
     SITE.btnSendTrainingNote();
     SITE.commentSubmit();
+    SITE.showSub();
+
 });
 
 SITE={
-    menuHead: function () {
-        $('.mbButtonMenu').click(function () {
-            $('.menuTop').addClass('on');
-            $('.mbButtonMenu').fadeOut();
-            $('.mbButtonMenuL').fadeIn();
-        });
-        $('.mbButtonMenuL').click(function () {
-            $('.menuTop').removeClass('on');
-            $('.mbButtonMenuL').fadeOut();
-            $('.mbButtonMenu').fadeIn();
-        });
-    },
-    backTop: function () {
-        $(window).scroll(function () {
-            if ($(window).scrollTop() > 0) {
-                $("#back-top").fadeIn();
-            } else {
-                $("#back-top").fadeOut();
-            }
-        });
-        $("#back-top").click(function () {
-            $("html, body").animate({scrollTop: 0}, 1000);
-            return false;
-        });
-    },
-    postSwipeReviews:function(){
-        $('#post-swipe-reviews').owlCarousel({
-            loop:true,
-            margin:10,
-            nav:true,
-            navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-            dots: true,
-            responsive:{0:{items:1}, 600:{items:1}, 768:{items:2}, 1000:{items:3}}
+    showSub:function(){
+        $('.tablinks ').click(function () {
+            var data = $(this).attr('data');
+            $('.blog-box').removeClass('active');
+            $('.blog-box'+data).addClass('active');
         });
     },
     contact: function () {

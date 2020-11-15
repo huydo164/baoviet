@@ -1,5 +1,4 @@
 <?php
-
 use App\Library\PHPDev\CGlobal;
 use App\Library\PHPDev\FuncLib;
 use App\Library\PHPDev\ThumbImg;
@@ -31,7 +30,7 @@ use App\Library\PHPDev\ThumbImg;
                                     <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <li class="nav-item <?php if($key == 1): ?> nav-item dropdown has-submenu menu-large hidden-md-down hidden-sm-down hidden-xs-down <?php endif; ?>">
-                                    <a <?php if($i > 0): ?> <?php endif; ?> title="<?php echo e($cat->category_title); ?>" class="nav-link <?php if($key == 1): ?> dropdown-toggle <?php endif; ?>" <?php if($key == 1): ?> id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php endif; ?> href="#">
+                                    <a <?php if($i > 0): ?> <?php endif; ?> title="<?php echo e($cat->category_title); ?>" class="nav-link <?php if($key == 1): ?> dropdown-toggle <?php endif; ?>" <?php if($key == 1): ?> id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php endif; ?> href="<?php if($cat->category_link_replace != ''): ?><?php echo e($cat->category_link_replace); ?><?php else: ?><?php echo e(FuncLib::buildLinkCategory($cat->category_id, $cat->category_title)); ?><?php endif; ?>">
                                         <?php echo e($cat->category_title); ?>
 
                                     </a>
@@ -43,7 +42,7 @@ use App\Library\PHPDev\ThumbImg;
                                                         <div class="tab">
                                                             <?php $__currentLoopData = $arrCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k => $sub): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <?php if($sub->category_menu == CGlobal::status_show && $sub->category_parent_id == $cat->category_id): ?>
-                                                                    <button class="tablinks <?php if($k == 2): ?> active <?php endif; ?>" onclick="openCategory(event, '<?php echo e($k); ?>')"><?php echo e($sub->category_title); ?></button>
+                                                                    <button data="<?php echo e($sub->category_id); ?>" class="tablinks tablinks<?php echo e($sub->category_id); ?>  <?php if($k == 2): ?> active <?php endif; ?>" onclick="openCategory(event, '<?php echo e($k); ?>')"><?php echo e($sub->category_title); ?></button>
                                                                 <?php endif; ?>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </div>
@@ -53,7 +52,7 @@ use App\Library\PHPDev\ThumbImg;
                                                                     <div id="<?php echo e($k); ?>" class="tabcontent <?php if($k == 2): ?> active <?php endif; ?>">
                                                                         <div class="row">
                                                                             <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                                                                                <div class="blog-box">
+                                                                                <div class="blog-box blog-box24 active">
                                                                                     <div class="post-media">
                                                                                         <a href="tech-single.html" title="">
                                                                                             <img src="upload/tech_menu_01.jpg" alt="" class="img-fluid">
@@ -63,7 +62,33 @@ use App\Library\PHPDev\ThumbImg;
                                                                                         </a>
                                                                                     </div><!-- end media -->
                                                                                     <div class="blog-meta">
-                                                                                        <h4><a href="tech-single.html" title="">Top 10+ care advice for your toenails</a></h4>
+                                                                                        <h4><a href="tech-single.html" title="">box24</a></h4>
+                                                                                    </div><!-- end meta -->
+                                                                                </div><!-- end blog-box -->
+                                                                                <div class="blog-box blog-box25">
+                                                                                    <div class="post-media">
+                                                                                        <a href="tech-single.html" title="">
+                                                                                            <img src="upload/tech_menu_01.jpg" alt="" class="img-fluid">
+                                                                                            <div class="hovereffect">
+                                                                                            </div><!-- end hover -->
+                                                                                            <span class="menucat">Science</span>
+                                                                                        </a>
+                                                                                    </div><!-- end media -->
+                                                                                    <div class="blog-meta">
+                                                                                        <h4><a href="tech-single.html" title="">box25</a></h4>
+                                                                                    </div><!-- end meta -->
+                                                                                </div><!-- end blog-box -->
+                                                                                <div class="blog-box blog-box26">
+                                                                                    <div class="post-media">
+                                                                                        <a href="tech-single.html" title="">
+                                                                                            <img src="upload/tech_menu_01.jpg" alt="" class="img-fluid">
+                                                                                            <div class="hovereffect">
+                                                                                            </div><!-- end hover -->
+                                                                                            <span class="menucat">Science</span>
+                                                                                        </a>
+                                                                                    </div><!-- end media -->
+                                                                                    <div class="blog-meta">
+                                                                                        <h4><a href="tech-single.html" title="">box26</a></h4>
                                                                                     </div><!-- end meta -->
                                                                                 </div><!-- end blog-box -->
                                                                             </div>

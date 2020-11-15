@@ -51,6 +51,12 @@ Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', '
     Route::post('author/edit/{id?}', array('as' => 'admin.author_edit','uses' => 'AuthorController@postItem', 'permission_name'=>'Sửa tác giả'))->where('id', '[0-9]+');
     Route::post('author/delete', array('as' => 'admin.author_delete','uses' => 'AuthorController@delete', 'permission_name'=>'Xóa tác giả'));
 
+    Route::get('video', array('as' => 'admin.video','uses' => 'VideoController@listView', 'permission_name'=>'Danh sách Video', 'display_menu'=>1, 'display_icon_sub'=>'fa fa-globe'));
+    Route::get('video/edit/{id?}', array('as' => 'admin.video_edit','uses' => 'VideoController@getItem', 'permission_name'=>'Chi tiết video'))->where('id', '[0-9]+');
+    Route::post('video/edit/{id?}', array('as' => 'admin.video_edit','uses' => 'VideoController@postItem', 'permission_name'=>'Sửa video'))->where('id', '[0-9]+');
+    Route::post('video/delete', array('as' => 'admin.video_delete','uses' => 'VideoController@delete', 'permission_name'=>'Xóa video'));
+
+
 });
 
 Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', 'namespace' => $namespace , 'group'=>'5','group_name'=>'Hệ thống', 'display_icon'=>'fa fa-tag'], function () {

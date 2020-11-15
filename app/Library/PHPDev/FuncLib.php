@@ -348,4 +348,11 @@ class FuncLib{
         }
         return '#';
     }
+
+    static function buildLinkDetailVideo($id = 0, $video_title = 'chi-tiet-video'){
+        if ($id > 0) {
+            return URL::route('site.detailVideo', array('id' => $id, 'name' => strtolower(FuncLib::safeTitle($video_title))));
+        }
+        return '#';
+    }
 }

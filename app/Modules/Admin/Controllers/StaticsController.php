@@ -5,6 +5,7 @@ use App\Library\PHPDev\FuncLib;
 use App\Modules\Models\Statics;
 use App\Modules\Models\Tag;
 use App\Modules\Models\TagStatics;
+use App\Modules\Models\Trash;
 use App\Modules\Models\Type;
 use App\Modules\Models\Category;
 use Illuminate\Support\Facades\Redirect;
@@ -202,7 +203,6 @@ class StaticsController extends BaseAdminController{
                     TagStatics::create($tmp);
                 }
             }
-            dd($dataSave);
             return Redirect::route('admin.statics');
         }else{
             foreach($dataSave as $key=>$val){
@@ -234,6 +234,7 @@ class StaticsController extends BaseAdminController{
         if(Session::token() === $token){
             if(!empty($listId) && is_array($listId)){
                 foreach($listId as $id){
+                    Trash::addItem($id, 'Statics', CGlobal::FOLDER_STATICS, 'statics_id', 'statics_title', 'statics_image', '');
                     Statics::deleteId($id);
                 }
                 Utility::messages('messages', 'Xóa thành công!', 'success');
