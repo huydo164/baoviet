@@ -10,8 +10,12 @@ use App\Library\PHPDev\ThumbImg;
             <div class="col-lg-7">
                 <div class="widget">
                     <div class="footer-text text-left">
-                        <a href="index.html"><img src="images/version/tech-footer-logo.png" alt="" class="img-fluid"></a>
-                        <p>Tech Blog is a technology blog, we sharing marketing, news and gadget articles.</p>
+                        @if(isset($arrTextLogo) && !empty($arrTextLogo))
+                            <a href="{{ FuncLib::getBaseUrl() }}">
+                                <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $arrTextLogo['info_id'], $arrTextLogo['info_img'], 2000, 0, '',true, true ) }}" alt="" class="img-fluid">
+                            </a>
+                        @endif
+                        <p>{!! isset($textFooter) ? strip_tags($textFooter) : '' !!}</p>
                         <div class="social">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
@@ -25,7 +29,7 @@ use App\Library\PHPDev\ThumbImg;
                         <div class="newsletter-widget text-left">
                             <form class="form-inline">
                                 <input type="text" class="form-control" placeholder="Enter your email address">
-                                <button type="submit" class="btn btn-primary">SUBMIT</button>
+                                <button type="submit" class="btn btn-primary">Gửi</button>
                             </form>
                         </div>
                         <!-- end newsletter -->

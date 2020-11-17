@@ -233,7 +233,7 @@ class StaticsController extends BaseStaticsController{
     public function pageVideo($catname, $catid){
         $pageNo = (int)Request::get('page', 1);
         $pageScroll = CGlobal::num_scroll_page;
-        $limit = CGlobal::num_record_per_page;
+        $limit = 7 ;
         $offset = ($pageNo - 1)*$limit;
         $total = 0;
         $data = $search = $dataCate =  array();
@@ -243,29 +243,54 @@ class StaticsController extends BaseStaticsController{
             $search['video_cat_name'] = $catname;
             $search['video_catid'] = $catid;
             $search['video_status'] = CGlobal::status_show;
-            $search['field_get'] = 'video_id,video_catid,video_cat_name,video_cat_alias,video_title,video_intro,video_content,video_image,video_created,video_youtube,video_tag,video_path';
+            $search['field_get'] = 'video_id,video_catid,video_cat_name,video_cat_alias,video_title,video_intro,video_content,video_image,video_created,video_youtube,video_tag,video_path,video_view_num';
             $data = Video::searchByCondition($search, $limit, $offset, $total);
             $paging = $total > 0 ? Pagging::getPager($pageScroll,$pageNo,$total,$limit, $search) : '';
             $dataCate = Category::getById($catid);
+        }
+        if(isset($dataCate->category_id)){
+            $meta_title = $dataCate->meta_title;
+            $meta_keywords = $dataCate->meta_keywords;
+            $meta_description = $dataCate->meta_description;
+            SEOMeta::init('', $meta_title, $meta_keywords, $meta_description);
         }
         $text_title_video = self::viewShareVal('TEXT_TITLE_VIDEO');
 
         return view('Statics::content.pageVideo',[
             'data' => $data,
+            'total' => $total,
             'dataCate' => $dataCate,
             'paging' => $paging,
             'text_title_video' => $text_title_video,
         ]);
     }
     public function videoDetail($name = '', $id = 0){
-        $data = $dataCate = array();
+        $data = $dataCate = $dataSame = array();
         if ($id > 0){
             $data = Video::getById($id);
             $dataCate = Category::getById($data->video_catid);
         }
+        if(isset($data->video_id)){
+            $meta_title = $data->meta_title;
+            $meta_keywords = $data->meta_keywords;
+            $meta_description = $data->meta_description;
+            $meta_img = $data->video_image;
+            if($meta_img != ''){
+                $meta_img = ThumbImg::thumbBaseNormal(CGlobal::FOLDER_VIDEO, $data->video_id, $data->video_image, 550, 0, '', true, true);
+            }
+            SEOMeta::init($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+            //Update View Num
+            $dataUpdate['video_view_num'] = (int)$data->video_view_num + 1;
+            Video::updateData($id, $dataUpdate);
+
+            $searchSame['field_get'] = 'video_id,video_catid,video_cat_name,video_cat_alias,video_title,video_intro,video_content,video_image,video_created,video_youtube,video_tag,video_path';
+            $dataSame = Video::getSameData($id,$data->video_catid,$limit = 2, $searchSame);
+        }
         return view('Statics::content.videoDetail',[
             'data' => $data,
             'dataCate' => $dataCate,
+            'dataSame' => $dataSame,
         ]);
     }
 }

@@ -212,7 +212,6 @@ class Category extends Model{
         }else{
             $result = (Memcache::CACHE_ON) ? Cache::get(Memcache::CACHE_ALL_CATEGORY) : array();
         }
-
         try{
             if(empty($result)){
                 $query = Category::where('category_id', '>', 0);

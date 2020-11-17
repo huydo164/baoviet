@@ -25,6 +25,12 @@
     font-weight: 400;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Poppins-Light';
+    src: url(../fonts/Poppins-Light.eot?#iefix) format("embedded-opentype"), url(../fonts/Poppins-Light.otf) format("opentype"), url(../fonts/Poppins-Light.woff) format("woff"), url(../fonts/Poppins-Light.ttf) format("truetype"), url(../fonts/Poppins-Light.svg#samsung-one-700) format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
 
 /**************************************
 
@@ -291,6 +297,15 @@ a {
     padding-right: 0.3rem;
 }
 
+.tab-detail .blog-meta h4 {
+    font-size: 14px;
+    margin: 0;
+    padding: 0.5rem 0 0;
+    line-height: 1.4;
+}
+.tab-detail .blog-meta a {
+    color: #111111;
+}
 .menu-large {
     overflow: hidden;
     position: static !important;
@@ -341,6 +356,10 @@ a {
 
 .post-media img {
     width: 100%;
+}
+.tab-detail .post-media img{
+    width: 100%;
+    height: 110px;
 }
 
 
@@ -411,7 +430,7 @@ div.tab button:hover {
 }
 
 .header .navbar-nav .has-submenu.menu-large ul li {
-    background: url(images/menubg.jpg) repeat-y center center #ffffff !important;
+    background: url(../img/menubg.jpg) repeat-y center center #ffffff !important;
 }
 
 .tab-details {
@@ -1294,7 +1313,7 @@ hr.invis3 {
 }
 
 .hovereffect span.videohover::before {
-    content: url(../img/videohover.png);
+    content: url(images/videohover.png);
 }
 
 .blog-list .blog-meta.big-meta h4 {

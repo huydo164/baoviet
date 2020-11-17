@@ -190,6 +190,7 @@ class Statics extends Model {
         if($id>0){
             Cache::forget(Memcache::CACHE_STATICS_ID.$id);
         }
+        Cache::forget(Memcache::CACHE_STATICS_FOCUS);
     }
 
     public static function removeCacheCatId($catid=0){
@@ -234,33 +235,36 @@ class Statics extends Model {
     }
 
     public static function getFocus($dataSearch=array(), $limit=10){
-        $result = array();
+        $result = (Memcache::CACHE_ON) ? Cache::get(Memcache::CACHE_STATICS_FOCUS) : array();
         try{
-            if($limit > 0){
-                $query = Statics::where('statics_id','>', 0);
-                $query->where('statics_focus', CGlobal::status_show);
-                $query->where('statics_status', CGlobal::status_show);
+            if (empty($result)){
+                if($limit > 0){
+                    $query = Statics::where('statics_id','>', 0);
+                    $query->where('statics_focus', CGlobal::status_show);
+                    $query->where('statics_status', CGlobal::status_show);
 
 
-                if(isset($dataSearch['statics_catid']) && $dataSearch['statics_catid'] != 0){
-                    $query->where('statics_catid', $dataSearch['statics_catid']);
+                    if(isset($dataSearch['statics_catid']) && $dataSearch['statics_catid'] != 0){
+                        $query->where('statics_catid', $dataSearch['statics_catid']);
+                    }
+
+                    if(isset($dataSearch['statics_order_no']) && $dataSearch['statics_order_no'] == 'asc'){
+                        $query->orderBy('statics_order_no', 'asc');
+                    }else{
+                        $query->orderBy('statics_id', 'desc');
+                    }
+
+                    $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+                    if(!empty($fields)){
+                        $result = $query->take($limit)->get($fields);
+                    }else{
+                        $result = $query->take($limit)->get();
+                    }
                 }
-
-                if(isset($dataSearch['statics_order_no']) && $dataSearch['statics_order_no'] == 'asc'){
-                    $query->orderBy('statics_order_no', 'asc');
-                }else{
-                    $query->orderBy('statics_id', 'desc');
+                if ($result && Memcache::CACHE_ON){
+                    Cache::put(Memcache::CACHE_STATICS_FOCUS,$result,Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
                 }
-
-                $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
-                if(!empty($fields)){
-                    $result = $query->take($limit)->get($fields);
-                }else{
-                    $result = $query->take($limit)->get();
-                }
-
             }
-
         }catch (PDOException $e){
             throw new PDOException();
         }

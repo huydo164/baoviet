@@ -123,11 +123,11 @@ use App\Library\PHPDev\FuncLib;
                                                             <a href="javascript:;"class="btn btn-primary link-button btn-sm" onclick="UploadAdmin.uploadonVideo(8);">Upload Video</a>
                                                         </div>
                                                         <div id="sys_show_video">
-                                                            <?php if($data->video_path != ''): ?>
+                                                            <?php if(isset($data['video_path'])): ?>
                                                                 <div class="video-upload" style="display: inline-block; text-align: center" >
                                                                     <video width="400" controls>
-                                                                        <source src="<?php echo e(FuncLib::getBaseUrl().'uploads/'.CGlobal::FOLDER_VIDEO_1.'/'.$data['video_id'].'/'.$data->video_path); ?>" type="video/mp4">
-                                                                        <source src="<?php echo e(FuncLib::getBaseUrl().'uploads/'.CGlobal::FOLDER_VIDEO_1.'/'.$data['video_id'].'/'.$data->video_path); ?>" type="video/mp4">
+                                                                        <source src="<?php echo e(FuncLib::getBaseUrl().'uploads/'.CGlobal::FOLDER_VIDEO_1.'/'.$data['video_id'].'/'.$data['video_path']); ?>" type="video/mp4">
+                                                                        <source src="<?php echo e(FuncLib::getBaseUrl().'uploads/'.CGlobal::FOLDER_VIDEO_1.'/'.$data['video_id'].'/'.$data['video_path']); ?>" type="video/mp4">
                                                                     </video>
                                                                     <br/>
                                                                     <a href="javascript:void(0);" id="sys_delete_img_other" onclick="UploadAdmin.removeVideo('<?php echo e($data['video_id']); ?>', '<?php echo e($data['video_path']); ?>', '8');">Xóa Video</a>

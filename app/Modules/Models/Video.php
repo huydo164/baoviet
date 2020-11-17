@@ -238,18 +238,22 @@ class Video extends Model {
     }
 
     public static function getSameData($id, $catId, $limit=10, $dataSearch=array()){
-        $result = array();
+        $result = (Memcache::CACHE_ON) ? Cache::get(Memcache::CACHE_VIDEO_SAME) : array();
         try{
-            if($limit > 0){
-                $query = video::where('video_id','>', 0);
-                $query->where('video_status', CGlobal::status_show);
-                $query->where('video_id','<>', $id);
-                $query->where('video_catid', $catId);
-                $query->orderBy('video_id', 'desc');
-                $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
-                $result = $query->take($limit)->get($fields);
+            if (empty($result)){
+                if($limit > 0){
+                    $query = video::where('video_id','>', 0);
+                    $query->where('video_status', CGlobal::status_show);
+                    $query->where('video_id','<>', $id);
+                    $query->where('video_catid', $catId);
+                    $query->orderBy('video_id', 'asc');
+                    $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+                    $result = $query->take($limit)->get($fields);
+                }
+                if ($result && Memcache::CACHE_ON){
+                    Cache::put(Memcache::CACHE_VIDEO_SAME,$result, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+                }
             }
-
         }catch (PDOException $e){
             throw new PDOException();
         }

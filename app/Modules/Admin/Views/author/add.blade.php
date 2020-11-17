@@ -60,7 +60,7 @@ use App\Library\PHPDev\FuncLib;
                                                         <div class="form-group">
                                                             <label class="control-label">Ảnh tác giả</label>
                                                             <div class="controls">
-                                                                <a href="javascript:;" class="btn btn-primary link-button btn-sm" onclick="UploadAdmin.uploadBannerAdvanced(2);">Upload ảnh tác giả</a>
+                                                                <a href="javascript:;" class="btn btn-primary link-button btn-sm" onclick="UploadAdmin.uploadMultipleImages(2);">Upload ảnh tác giả</a>
                                                                 <div id="sys_show_image_banner">
                                                                     @if(isset($data['author_image']) && $data['author_image'] !='')
                                                                     <img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_AUTHOR, $data['author_id'], $data['author_image'], 300, 0, '', true, true)}}" />

@@ -52,8 +52,25 @@ class BaseStaticsController extends Controller{
         $arrCategory = Category::getAllCategory(0, array(), 0);
         View::share('arrCategory',$arrCategory);
 
+        $arrStaticsByCatid = array();
+        $dataSearch['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created';
+        if (!empty($arrCategory)){
+            foreach ($arrCategory as $item){
+                if ($item->category_parent_id > 0){
+                    $cateParentId =  $item->category_parent_id;
+                }
+            }
+        }
+        if ($cateParentId > 0){
+            $arrStaticsByCatid = Statics::getFocus($dataSearch,$limit = 20);
+        }
+        View::share('arrStaticsByCatid',$arrStaticsByCatid);
+
         $arrTextLogo = Info::getItemByKeyword('SITE_LOGO');
         View::share('arrTextLogo',$arrTextLogo);
+
+        $textFooter = self::viewShareVal('TEXT_FOOTER');
+        View::share('textFooter',$textFooter);
 
         $search['field_get'] = 'statics_id,statics_title,statics_intro,statics_created,statics_view_num';
         $popular_post = Statics::getPopularPost($search,3);

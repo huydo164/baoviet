@@ -28,14 +28,12 @@
                     var checked_img_pro = "<div class='clear'></div><input type='radio' id='checked_image_"+dataResult.info.id_key+"' name='checked_image' value='"+dataResult.info.id_key+"' onclick='UploadAdmin.checkedImage(\""+dataResult.info.name_img+"\",\"" + dataResult.info.id_key + "\")'><label for='checked_image_"+dataResult.info.id_key+"' style='font-weight:normal'>Ảnh đại diện</label><br/>";
 
                     var delete_img = "<a href='javascript:void(0);' id='sys_delete_img_other_" + dataResult.info.id_key + "' onclick='UploadAdmin.removeImage(\""+dataResult.info.id_key+"\",\""+dataResult.id_item+"\",\""+dataResult.info.name_img+"\",\""+type+"\")' >Xóa ảnh</a>";
-                    var delete_video = "<a href='javascript:void(0);' id='sys_delete_video_other_" + "' onclick='UploadAdmin.removeVideo(\""+dataResult.id_item+"\",\""+dataResult.info.name_img+"\",\""+type+"\")' >Xóa Video</a>";
                     var html= "<li id='sys_div_img_other_" + dataResult.info.id_key + "'>";
                     html += "<div class='div_img_upload' >";
                     html += "<img height='80' src='" + dataResult.info.src + "'/>";
                     html += "<input type='hidden' id='sys_img_other_" + dataResult.info.id_key + "' class='sys_img_other' name='img_other[]' value='" + dataResult.info.name_img + "'/>";
                     html += checked_img_pro;
                     html += delete_img;
-                    html += delete_video;
                     html +="</div></li>";
                     jQuery('#sys_drag_sort').append(html);
 
@@ -161,7 +159,7 @@
         jQuery('#image_primary_hover').val(nameImage);
     },
 
-    removeImage: function(id,nameImage,type){
+    removeImage: function(key,id,nameImage,type){
         if(jQuery("#image_primary_hover").length ){
             var img_hover = jQuery("#image_primary_hover").val();
             if(img_hover == nameImage){

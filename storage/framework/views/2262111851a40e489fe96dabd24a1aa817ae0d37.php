@@ -10,8 +10,12 @@ use App\Library\PHPDev\ThumbImg;
             <div class="col-lg-7">
                 <div class="widget">
                     <div class="footer-text text-left">
-                        <a href="index.html"><img src="images/version/tech-footer-logo.png" alt="" class="img-fluid"></a>
-                        <p>Tech Blog is a technology blog, we sharing marketing, news and gadget articles.</p>
+                        <?php if(isset($arrTextLogo) && !empty($arrTextLogo)): ?>
+                            <a href="<?php echo e(FuncLib::getBaseUrl()); ?>">
+                                <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $arrTextLogo['info_id'], $arrTextLogo['info_img'], 2000, 0, '',true, true )); ?>" alt="" class="img-fluid">
+                            </a>
+                        <?php endif; ?>
+                        <p><?php echo isset($textFooter) ? strip_tags($textFooter) : ''; ?></p>
                         <div class="social">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>

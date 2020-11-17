@@ -29,16 +29,18 @@ use App\Library\PHPDev\FuncLib;
 
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/focus/css/reset.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/site.css')); ?>" />
-    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/site-1.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/media.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/animate.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/bootstrap.css')); ?>" />
+    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/tech.css')); ?>" />
+    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/responsive.css')); ?>" />
 
     <script src="<?php echo e(URL::asset('assets/focus/js/jquery.2.1.1.min.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/libs/bootstrap/js/bootstrap.min.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/libs/number/autoNumeric.js')); ?>"></script>
 
     <script src="<?php echo e(URL::asset('assets/frontend/js/site.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/frontend/js/custom.js')); ?>"></script>
 
     <?php echo CGlobal::$extraHeaderCSS; ?>
 

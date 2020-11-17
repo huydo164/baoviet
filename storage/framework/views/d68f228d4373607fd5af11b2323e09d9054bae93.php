@@ -79,184 +79,21 @@ use App\Library\PHPDev\ThumbImg;
                                                     <?php endif; ?></a></small>
                                             <small><a href="<?php echo e(FuncLib::buildLinkDetailVideo($item->video_id, $item->video_title)); ?>" title=""><?php echo e(date('d-m-Y', $item->video_created)); ?></a></small>
                                             <small><a href="<?php echo e(FuncLib::buildLinkDetailVideo($item->video_id, $item->video_title)); ?>" title="">by Amanda</a></small>
-                                            <small><a href="#" title=""><i class="fa fa-eye"></i> 1114</a></small>
+                                            <small><a href="#" title=""><i class="fa fa-eye"></i> <?php echo e($item->video_view_num); ?></a></small>
                                         </div><!-- end meta -->
                                     </div><!-- end blog-box -->
                                     <hr class="invis">
-
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endif; ?>
-
-
-                            <hr class="invis">
-
-                            <div class="blog-box">
-                                <div class="post-media">
-                                    <a href="tech-single.html" title="">
-                                        <img src="upload/tech_menu_19.jpg" alt="" class="img-fluid">
-                                        <div class="hovereffect">
-                                            <span class="videohover"></span>
-                                        </div>
-                                        <!-- end hover -->
-                                    </a>
+                        </div>
+                        <?php if($total>0): ?>
+                            <div class="show-bottom-info">
+                                <div class="list-item-page">
+                                    <div class="showListPage"><?php echo $paging; ?></div>
                                 </div>
-                                <!-- end media -->
-                                <div class="blog-meta big-meta text-center">
-
-                                    <div class="post-sharing">
-                                        <ul class="list-inline">
-                                            <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                            <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                                            <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div><!-- end post-sharing -->
-                                    <h4><a href="tech-single.html" title="">Your visit to China will be good for your soul</a></h4>
-                                    <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enimcerat elicerat eli nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                    <small><a href="tech-category.html" title="">Videos</a></small>
-                                    <small><a href="tech-single.html" title="">18 July, 2017</a></small>
-                                    <small><a href="tech-author.html" title="">by Amanda</a></small>
-                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 1114</a></small>
-                                </div><!-- end meta -->
-                            </div><!-- end blog-box -->
-
-                            <hr class="invis">
-
-                            <div class="blog-box">
-                                <div class="post-media">
-                                    <a href="tech-single.html" title="">
-                                        <img src="upload/tech_menu_18.jpg" alt="" class="img-fluid">
-                                        <div class="hovereffect">
-                                            <span class="videohover"></span>
-                                        </div>
-                                        <!-- end hover -->
-                                    </a>
-                                </div>
-                                <!-- end media -->
-                                <div class="blog-meta big-meta text-center">
-                                    <div class="post-sharing">
-                                        <ul class="list-inline">
-                                            <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                            <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                                            <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div><!-- end post-sharing -->
-                                    <h4><a href="tech-single.html" title="">Extend your feet and enjoy the nature</a></h4>
-                                    <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enimcerat elicerat eli nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                    <small><a href="tech-category.html" title="">Videos</a></small>
-                                    <small><a href="tech-single.html" title="">18 July, 2017</a></small>
-                                    <small><a href="tech-author.html" title="">by Amanda</a></small>
-                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 1114</a></small>
-                                </div><!-- end meta -->
-                            </div><!-- end blog-box -->
-
-                            <hr class="invis">
-
-                            <div class="blog-box">
-                                <div class="post-media">
-                                    <a href="tech-single.html" title="">
-                                        <img src="upload/tech_menu_17.jpg" alt="" class="img-fluid">
-                                        <div class="hovereffect">
-                                            <span class="videohover"></span>
-                                        </div>
-                                        <!-- end hover -->
-                                    </a>
-                                </div>
-                                <!-- end media -->
-                                <div class="blog-meta big-meta text-center">
-                                    <div class="post-sharing">
-                                        <ul class="list-inline">
-                                            <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                            <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                                            <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div><!-- end post-sharing -->
-                                    <h4><a href="tech-single.html" title="">Stay alone with nature to rest your soul</a></h4>
-                                    <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enimcerat elicerat eli nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                    <small><a href="tech-category.html" title="">Videos</a></small>
-                                    <small><a href="tech-single.html" title="">18 July, 2017</a></small>
-                                    <small><a href="tech-author.html" title="">by Amanda</a></small>
-                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 1114</a></small>
-                                </div><!-- end meta -->
-                            </div><!-- end blog-box -->
-
-                            <hr class="invis">
-
-                            <div class="blog-box">
-                                <div class="post-media">
-                                    <a href="tech-single.html" title="">
-                                        <img src="upload/tech_menu_16.jpg" alt="" class="img-fluid">
-                                        <div class="hovereffect">
-                                            <span class="videohover"></span>
-                                        </div>
-                                        <!-- end hover -->
-                                    </a>
-                                </div>
-                                <!-- end media -->
-                                <div class="blog-meta big-meta text-center">
-                                    <div class="post-sharing">
-                                        <ul class="list-inline">
-                                            <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                            <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                                            <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div><!-- end post-sharing -->
-                                    <h4><a href="tech-single.html" title="">Sea waves and endless happiness</a></h4>
-                                    <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enimcerat elicerat eli nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                    <small><a href="tech-category.html" title="">Videos</a></small>
-                                    <small><a href="tech-single.html" title="">18 July, 2017</a></small>
-                                    <small><a href="tech-author.html" title="">by Amanda</a></small>
-                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 1114</a></small>
-                                </div><!-- end meta -->
-                            </div><!-- end blog-box -->
-
-                            <hr class="invis">
-
-                            <div class="blog-box">
-                                <div class="post-media">
-                                    <a href="tech-single.html" title="">
-                                        <img src="upload/tech_menu_15.jpg" alt="" class="img-fluid">
-                                        <div class="hovereffect">
-                                            <span class="videohover"></span>
-                                        </div>
-                                        <!-- end hover -->
-                                    </a>
-                                </div>
-                                <!-- end media -->
-                                <div class="blog-meta big-meta text-center">
-                                    <div class="post-sharing">
-                                        <ul class="list-inline">
-                                            <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                            <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                                            <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div><!-- end post-sharing -->
-                                    <h4><a href="techsingle.html" title="">How to spend a romantic holiday with your girlfriend?</a></h4>
-                                    <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enimcerat elicerat eli nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                    <small><a href="tech-category.html" title="">Videos</a></small>
-                                    <small><a href="tech-single.html" title="">18 July, 2017</a></small>
-                                    <small><a href="tech-author.html" title="">by Amanda</a></small>
-                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 1114</a></small>
-                                </div><!-- end meta -->
-                            </div><!-- end blog-box -->
-                        </div><!-- end blog-custom-build -->
-                    </div><!-- end page-wrapper -->
-
-                    <hr class="invis">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div><!-- end col -->
-                    </div><!-- end row -->
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div><!-- end col -->
 
                 <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
