@@ -29,7 +29,7 @@ use App\Library\PHPDev\ThumbImg;
                         <div class="newsletter-widget text-left">
                             <form class="form-inline">
                                 <input type="text" class="form-control" placeholder="Enter your email address">
-                                <button type="submit" class="btn btn-primary">SUBMIT</button>
+                                <button type="submit" class="btn btn-primary">Gửi</button>
                             </form>
                         </div>
                         <!-- end newsletter -->
