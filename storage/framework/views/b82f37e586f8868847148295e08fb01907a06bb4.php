@@ -49,7 +49,14 @@ use App\Library\PHPDev\ThumbImg;
                             <!-- end title -->
 
                             <div class="single-post-media">
-                                <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_VIDEO,$data->video_id,$data->video_image,800,0,'',true,true)); ?>" alt="" class="img-fluid">
+                                <?php if(isset($data['video_path'])): ?>
+                                    <div class="video-upload" style="display: inline-block; text-align: center" >
+                                        <video width="100%" controls>
+                                            <source src="<?php echo e(FuncLib::getBaseUrl().'uploads/'.CGlobal::FOLDER_VIDEO_1.'/'.$data['video_id'].'/'.$data['video_path']); ?>" type="video/mp4">
+                                            <source src="<?php echo e(FuncLib::getBaseUrl().'uploads/'.CGlobal::FOLDER_VIDEO_1.'/'.$data['video_id'].'/'.$data['video_path']); ?>" type="video/mp4">
+                                        </video>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <!-- end media -->
 

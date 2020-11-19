@@ -367,7 +367,9 @@ a {
     width: 100%;
     height: 110px;
 }
-
+.custombox .post-media img{
+   height: 235px;
+}
 
 /* Style the tab */
 
@@ -1318,7 +1320,7 @@ hr.invis3 {
 }
 
 .hovereffect span.videohover::before {
-    content: url(images/videohover.png);
+    content: url(../img/videohover.png);
 }
 
 .blog-list .blog-meta.big-meta h4 {
