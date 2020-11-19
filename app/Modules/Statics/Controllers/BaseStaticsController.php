@@ -32,6 +32,8 @@ class BaseStaticsController extends Controller{
                     header('Content-Type: text/html; charset=utf-8');
                     echo '<div style="text-align: center"><img src="'.FuncLib::getBaseUrl().'assets/frontend/img/maintain.png"></div>';
                     echo '<div style="text-align: center; margin-top:10px">'.CGlobal::txtMaintain.'</div>';die;
+                }else{
+                    View::share('users',$users);
                 }
                 return $next($request);
             });

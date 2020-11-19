@@ -255,6 +255,15 @@ class StaticsController extends BaseStaticsController{
             SEOMeta::init('', $meta_title, $meta_keywords, $meta_description);
         }
         $text_title_video = self::viewShareVal('TEXT_TITLE_VIDEO');
+        $text_trend_video = strip_tags( self::viewShareVal('TEXT_TREND_VIDEO'));
+
+        $cat_id_video = (int)strip_tags(self::viewShareVal('CAT_ID_VIDEO'));
+        $data_video = [];
+        if ($cat_id_video > 0){
+            $data_search_video['video_catid']  = $cat_id_video;
+            $data_search_video['video_order_no'] = 'desc';
+            $data_video = Video::getFocus($data_search_video,$limit = 3);
+        }
 
         return view('Statics::content.pageVideo',[
             'data' => $data,
@@ -262,10 +271,13 @@ class StaticsController extends BaseStaticsController{
             'dataCate' => $dataCate,
             'paging' => $paging,
             'text_title_video' => $text_title_video,
+            'text_trend_video' => $text_trend_video,
+            'data_video' => $data_video,
         ]);
     }
     public function videoDetail($name = '', $id = 0){
         $data = $dataCate = $dataSame = array();
+
         if ($id > 0){
             $data = Video::getById($id);
             $dataCate = Category::getById($data->video_catid);
@@ -287,10 +299,22 @@ class StaticsController extends BaseStaticsController{
             $searchSame['field_get'] = 'video_id,video_catid,video_cat_name,video_cat_alias,video_title,video_intro,video_content,video_image,video_created,video_youtube,video_tag,video_path';
             $dataSame = Video::getSameData($id,$data->video_catid,$limit = 2, $searchSame);
         }
+        $text_trend_video = strip_tags(self::viewShareVal('TEXT_TREND_VIDEO'));
+
+        $cat_id_video = (int)strip_tags(self::viewShareVal('CAT_ID_VIDEO'));
+        $data_video = [];
+        if ($cat_id_video > 0){
+            $data_search_video['video_catid']  = $cat_id_video;
+            $data_search_video['video_order_no'] = 'desc';
+            $data_video = Video::getFocus($data_search_video,$limit = 3);
+        }
+
         return view('Statics::content.videoDetail',[
             'data' => $data,
             'dataCate' => $dataCate,
             'dataSame' => $dataSame,
+            'text_trend_video' => $text_trend_video,
+            'data_video' => $data_video
         ]);
     }
 }

@@ -216,8 +216,9 @@ use App\Library\PHPDev\ThumbImg;
                         <!-- end page-wrapper -->
                     </div>
                     <!-- end col -->
-
-                <?php echo $__env->make('Statics::block.right', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <?php echo $__env->make('Statics::block.right', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    </div><!-- end col -->
                 <!-- end col -->
                 </div>
                 <!-- end row -->

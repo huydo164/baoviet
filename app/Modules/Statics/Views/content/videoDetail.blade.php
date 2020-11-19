@@ -214,8 +214,9 @@ use App\Library\PHPDev\ThumbImg;
                         <!-- end page-wrapper -->
                     </div>
                     <!-- end col -->
-
-                @include('Statics::block.right')
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        @include('Statics::block.right')
+                    </div><!-- end col -->
                 <!-- end col -->
                 </div>
                 <!-- end row -->
