@@ -76,6 +76,20 @@ class BaseStaticsController extends Controller{
         $popular_post = Statics::getPopularPost($search,3);
         View::share('popular_post',$popular_post);
 
+        $site_footer_center = self::viewShareVal('SITE_FOOTER_CENTER');
+        View::share('site_footer_center',$site_footer_center);
+
+        $site_footer_right = self::viewShareVal('SITE_FOOTER_RIGHT');
+        View::share('site_footer_right',$site_footer_right);
+
+        $title_footer_right = strip_tags(self::viewShareVal('TEXT_FOOTER_RIGHT'));
+        View::share('title_footer_right',$title_footer_right);
+
+        $title_footer_center = strip_tags(self::viewShareVal('TEXT_FOOTER_CENTER'));
+        View::share('title_footer_center',$title_footer_center);
+
+        $copyright = strip_tags(self::viewShareVal('SITE_COPY_RIGHT'));
+        View::share('copyright',$copyright);
     }
     public function page403(){
         $meta_img='';

@@ -301,7 +301,13 @@ a {
     font-size: 14px;
     margin: 0;
     padding: 0.5rem 0 0;
-    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 1;
+    height: 32px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 .tab-detail .blog-meta a {
     color: #111111;
@@ -702,7 +708,6 @@ div.tab button:hover {
 .footer .fa-star {
     font-size: 12px;
 }
-
 .footer h5,
 .footer ul li a {
     color: #111111;
@@ -726,7 +731,7 @@ div.tab button:hover {
 
 .dmtop {
     background-color: #111111;
-    background-image: url(images/arrow.png);
+    background-image: url(../img/arrow.png);
     background-position: 50% 50%;
     background-repeat: no-repeat;
     z-index: 9999;
@@ -1648,9 +1653,10 @@ hr.invis3 {
 }
 
 .newsletter-widget .btn {
-    height: 54px;
+    height: 56px;
     border-radius: 0;
     border: 0;
+    font-size: 23px;
 }
 
 .newsletter-widget .btn i {
